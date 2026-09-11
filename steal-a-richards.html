@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Steal a Richards</title>
+  <link rel="stylesheet" href="steal-a-richards.css">
+</head>
+<body>
+  <h1>Steal a Richards</h1>
+  <p>Flytt med piltastene eller WASD. Stjel Richard (gult) og unngå fiender (røde).</p>
+  <div id="game" style="width:800px;height:480px">
+    <div id="overlay">Klikk her for å låse musepekeren og se deg rundt</div>
+    <div id="mainMenu" class="hidden">
+      <div class="menuBox">
+        <h2>Steal a Richards</h2>
+        <div class="menuSmall">Pausemeny</div>
+        <div class="menuBtns">
+          <button id="resumeBtn" class="menuBtn primary">Resume / Fortsett</button>
+          <button id="menuMissionsBtn" class="menuBtn">Missions</button>
+          <button id="menuSettingsBtn" class="menuBtn">Settings</button>
+          <button id="fullscreenBtn" class="menuBtn">Toggle Fullscreen (F)</button>
+          <button id="musicBtn" class="menuBtn">Music: On</button>
+          <button id="shopBtn" class="menuBtn">Shop</button>
+          <button id="quitBtn" class="menuBtn">Quit (Reload)</button>
+        </div>
+        <div id="menuMissionDetails" class="menuSmall">Ingen aktiv oppdrag</div>
+      </div>
+    </div>
+    
+    <div id="hud">Score: <span id="score">0</span></div>
+    <div id="mission" style="margin-top:6px;">Mission: Ingen aktive oppdrag</div>
+    <div id="coins" style="margin-top:6px;">Coins: <span id="coinCount">0</span></div>
+    <div id="questBox" style="margin-top:6px; color:#cde; max-width:800px;">Trykk <strong>E</strong> ved en blå person for å starte et oppdrag.</div>
+
+    <div id="gameUI">
+      <h4>HUD</h4>
+      <div class="stat">Coins: <span id="uiCoin">0</span></div>
+      <div class="stat">Score: <span id="uiScore">0</span></div>
+      <div class="small">Active Quest:</div>
+      <div id="uiQuest" class="small">Ingen</div>
+      <div id="uiQuestProgress" class="small"></div>
+      <div class="hint">Press <strong>V</strong> to abandon current quest</div>
+    </div>
+
+    <div id="shopPanel">
+      <h4>Shop</h4>
+      <div class="shopItem"><div>Speed Upgrade (Level <span id="speedLevel">0</span>)</div><div><button id="buySpeed">Buy (100)</button></div></div>
+      <div class="shopItem"><div>Coin Multiplier (Level <span id="multiLevel">0</span>)</div><div><button id="buyMulti">Buy (150)</button></div></div>
+      <div class="shopItem"><div>Reset Upgrades</div><div><button id="resetUpgrades">Reset</button></div></div>
+      <button id="closeShop" class="shopClose">Close</button>
+    </div>
+
+  </div>
+  <div style="margin-top:8px;"><button id="lockBtn" onclick="(function(){const e=document.querySelector('canvas')||document.body; if(e.requestPointerLock) e.requestPointerLock(); else alert('Pointer Lock ikke tilgjengelig');})();">Lås musepekeren (fallback)</button></div>
+  <div style="margin-top:8px;"><button id="startBtn" onclick="(function(){ const o=document.getElementById('overlay'); if(o) o.style.display='none'; const s=document.getElementById('startBtn'); if(s) s.style.display='none'; const l=document.getElementById('lockBtn'); if(l) l.style.display='inline-block'; const e=document.querySelector('canvas')||document.body; if(e.requestPointerLock) e.requestPointerLock(); })()">Start</button></div>
+  <div id="settingsPanel">
+    <h3>Settings</h3>
+    <label><input type="checkbox" id="shadowsToggle" checked> Shadows</label><br>
+    <label>Resolution: <select id="resolutionSelect"><option value="1">1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select></label><br>
+    <label>Shadow Quality: <select id="shadowQuality"><option value="512">Low</option><option value="1024" selected>Medium</option><option value="2048">High</option></select></label><br>
+    <button id="applySettings">Apply</button>
+  </div>
+  <script src="https://unpkg.com/three@0.154.0/build/three.min.js"></script>
+  <script src="steal-a-richards.js"></script>
+</body>
+</html>
